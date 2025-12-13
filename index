@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boostmint Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #006b5c;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background: #006b5c;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Boostmint – Admin Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Service</th>
+    </tr>
+  </thead>
+  <tbody id="orders"></tbody>
+</table>
+
+<script>
+  const orders = JSON.parse(localStorage.getItem("boostmintOrders")) || [];
+  const table = document.getElementById("orders");
+
+  orders.forEach(order => {
+    const row = `<tr>
+      <td>${order.name}</td>
+      <td>${order.phone}</td>
+      <td>${order.service}</td>
+    </tr>`;
+    table.innerHTML += row;
+  });
+</script>
+
+</body>
+</html>
