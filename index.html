@@ -48,18 +48,30 @@
 </table>
 
 <script>
-  const orders = JSON.parse(localStorage.getItem("boostmintOrders")) || [];
-  const table = document.getElementById("orders");
+const orders = JSON.parse(localStorage.getItem("boostmintOrders")) || [];
+const table = document.getElementById("orders");
 
-  orders.forEach(order => {
-    const row = `<tr>
+function updateStatus(index){
+  orders[index].status = "Completed";
+  localStorage.setItem("boostmintOrders", JSON.stringify(orders));
+  location.reload();
+}
+
+orders.forEach((order, index) => {
+  const row = `
+    <tr>
       <td>${order.name}</td>
       <td>${order.phone}</td>
       <td>${order.service}</td>
+      <td>${order.status}</td>
+      <td>
+        ${order.status === "Pending"
+          ? `<button onclick="updateStatus(${index})">Mark Done</button>`
+          : "✅"}
+      </td>
     </tr>`;
-    table.innerHTML += row;
-  });
+  table.innerHTML += row;
+});
 </script>
-
 </body>
 </html>
