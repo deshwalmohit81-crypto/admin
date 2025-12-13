@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script>
+if(localStorage.getItem("adminLoggedIn") !== "true"){
+  window.location.href = "admin-login.html";
+}
+</script>
   <script>
 
   <meta charset="UTF-8">
