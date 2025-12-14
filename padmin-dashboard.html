@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard | Boostmint</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+body{
+  background:#020617;
+  color:#fff;
+}
+
+/* Sidebar */
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  height:100vh;
+  width:230px;
+  background:#020617;
+  border-right:1px solid #1e293b;
+  padding:25px;
+}
+.sidebar h2{
+  color:#facc15;
+  margin-bottom:30px;
+}
+.sidebar a{
+  display:block;
+  color:#cbd5f5;
+  text-decoration:none;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+.sidebar a:hover{
+  background:#1e293b;
+}
+
+/* Content */
+.main{
+  margin-left:250px;
+  padding:30px;
+}
+.card{
+  background:#0f172a;
+  padding:25px;
+  border-radius:18px;
+  margin-bottom:25px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th,td{
+  padding:12px;
+  border-bottom:1px solid #1e293b;
+  text-align:left;
+}
+th{color:#facc15}
+</style>
+</head>
+
+<body>
+
+<script>
+if(localStorage.getItem("adminLoggedIn") !== "true"){
+  window.location.href="Index.html";
+}
+</script>
+
+<div class="sidebar">
+  <h2>Admin Panel</h2>
+  <a href="#">Dashboard</a>
+  <a href="#">Orders</a>
+  <a href="#">Users</a>
+  <a href="#" onclick="logout()">Logout</a>
+</div>
+
+<div class="main">
+  <div class="card">
+    <h3>📦 Orders</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Service</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="orderData"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+function logout(){
+  localStorage.removeItem("adminLoggedIn");
+  window.location.href="Index.html";
+}
+
+// Load Orders
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+let tbody = document.getElementById("orderData");
+
+orders.forEach(o=>{
+  tbody.innerHTML += `
+    <tr>
+      <td>${o.name}</td>
+      <td>${o.service}</td>
+      <td>₹${o.price}</td>
+      <td>${o.status || "Pending"}</td>
+    </tr>
+  `;
+});
+</script>
+
+</body>
+</html>
