@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Login | Boostmint</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#020617,#0f172a);
+}
+
+.card{
+  width:360px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px);
+  padding:35px;
+  border-radius:22px;
+  color:#fff;
+  box-shadow:0 30px 60px rgba(0,0,0,.5);
+  animation:pop .6s ease;
+}
+@keyframes pop{
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
+}
+
+h2{text-align:center;color:#facc15}
+p{text-align:center;font-size:13px;color:#cbd5f5;margin:10px 0 25px}
+
+input{
+  width:100%;
+  padding:13px;
+  border-radius:14px;
+  border:none;
+  margin-bottom:18px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(135deg,#facc15,#fde047);
+  font-weight:700;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>Admin Login 🔐</h2>
+  <p>Authorized access only</p>
+
+  <input type="email" id="email" placeholder="Admin Email">
+  <input type="password" id="password" placeholder="Admin Password">
+
+  <button onclick="adminLogin()">Login</button>
+</div>
+
+<script>
+const ADMIN_EMAIL = "admin@boostmint.in";
+const ADMIN_PASS  = "admin123";
+
+function adminLogin(){
+  const email = document.getElementById("email").value;
+  const pass  = document.getElementById("password").value;
+
+  if(email === ADMIN_EMAIL && pass === ADMIN_PASS){
+    localStorage.setItem("adminLoggedIn","true");
+    window.location.href="padmin-dashboard.html";
+  } else {
+    alert("Unauthorized access");
+  }
+}
+</script>
+
+</body>
+</html>
